@@ -10,6 +10,8 @@ from contextlib import asynccontextmanager
 from datetime import datetime
 from pathlib import Path
 from typing import List
+import concurrent.futures
+import ipaddress
 
 import httpx
 import psutil
@@ -526,3 +528,44 @@ async def get_network_telemetry():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=False)
+
+def ping_ip(ip):
+    try:
+        # Ping rapido di 1 solo pacchetto con timeout di 0.5 secondi
+        result = subprocess.run(
+            ["ping", "-c", "1", "-W", "1", str(ip)],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=1
+        )
+        if result.returncode == 0:
+            ip_str = str(ip)
+            try:
+                hostname = socket.gethostbyaddr(ip_str)[0]
+            except socket.herror:
+                hostname = "Dispositivo LAN"
+            return {"ip": ip_str, "hostname": hostname, "status": "Online"}
+    except (subprocess.TimeoutExpired, Exception):
+        pass
+    return None
+
+@app.get("/api/scan-network")
+def scan_network():
+    # Rileva la subnet locale (es. 192.168.1.0/24)
+    local_ip = socket.gethostbyname(socket.gethostname())
+    if local_ip.startswith("127."):
+        local_ip = "192.168.1.1" # Fallback sicuro
+    
+    network_str = ".".join(local_ip.split(".")[:3]) + ".0/24"
+    net = ipaddress.ip_network(network_str, strict=False)
+    
+    active_devices = []
+    # Esegue i ping in parallelo per essere velocissimo e non bloccarsi
+    with concurrent.futures.ThreadPoolExecutor(max_workers=30) as executor:
+        futures = [executor.submit(ping_ip, ip) for ip in net.hosts()]
+        for future in concurrent.futures.as_completed(futures):
+            res = future.result()
+            if res:
+                active_devices.append(res)
+                
+    return {"devices": active_devices}
