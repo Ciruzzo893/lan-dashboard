@@ -1,0 +1,242 @@
+{
+  "60:1B:52:57:2C:00": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "vodafone.station"
+  },
+  "CA:2C:4F:E2:8D:23": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "A8:08:CF:5A:06:19": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "28:73:F6:6D:DC:7B": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "C6:1D:86:4E:45:70": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "GabryPhone.station"
+  },
+  "D4:8A:FC:41:50:58": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "shellyplus2pm-d48afc415058.station"
+  },
+  "D4:8A:FC:41:93:08": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "shellyplus2pm-d48afc419308.station"
+  },
+  "08:3A:F2:24:4B:50": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "CA:2C:4F:E2:54:E6": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "D4:8A:FC:40:8C:CC": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "shellyplus2pm-d48afc408ccc.station"
+  },
+  "68:FC:CA:B5:27:B6": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Samsung.station"
+  },
+  "48:55:19:51:92:E5": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "ESP_5192E5.station"
+  },
+  "08:3A:F2:24:B9:38": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "D0:21:F9:73:12:0D": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "A0:A3:B3:5B:2A:9C": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "shellyplus2pm-a0a3b35b2a9c.station"
+  },
+  "A0:A3:B3:59:CE:34": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "shellyplus2pm-a0a3b359ce34.station"
+  },
+  "A0:A3:B3:C3:F3:0C": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "shellyplus2pm-a0a3b3c3f30c.station"
+  },
+  "EC:94:CB:A4:5F:80": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "ESP_A45F80.station"
+  },
+  "FC:B4:67:BA:99:48": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Giuseppe.station"
+  },
+  "FC:B4:67:BA:A4:F0": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "shellyplus2pm-fcb467baa4f0.station"
+  },
+  "BC:5C:17:F6:6A:21": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "08:3A:F2:25:C4:38": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "A0:A3:B3:C2:E4:58": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "shellyplus2pm-a0a3b3c2e458.station"
+  },
+  "94:3C:C6:C7:B7:E8": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "2C:FE:E2:F8:18:8E": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "24:2F:D0:ED:AE:C7": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "L900.station"
+  },
+  "A8:31:62:BD:B9:BB": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "NOMI-IPC-K2EC-4H1W-84B5.station"
+  },
+  "94:3C:C6:C7:B0:98": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "espressif.station"
+  },
+  "10:38:1F:8F:4C:EE": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "28:87:BA:FA:0B:9C": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "34:60:F9:1A:BE:0E": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "P100.station"
+  },
+  "4C:A9:19:12:A6:51": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "lwip0.station"
+  },
+  "08:3A:F2:24:9E:B0": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "94:3C:C6:C7:AC:04": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "A0:BD:1D:EA:F0:60": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "MARCO.station"
+  },
+  "80:D2:1D:CE:E5:12": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Roomba-31C8890C80108730.station"
+  },
+  "4C:EB:D6:9E:3A:18": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "ESP_9E3A18.station"
+  },
+  "34:AF:B3:B1:BF:F1": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "08:3A:F2:24:DF:F4": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "08:3A:F2:24:6B:40": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "F4:03:2A:09:23:DE": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "08:3A:F2:24:DC:A8": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "AC:41:6A:0D:12:D9": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "08:3A:F2:24:81:A0": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "68:B6:91:E0:4B:90": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "B0:CF:CB:29:D1:33": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "F4:03:2A:95:BD:FA": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "amazon-65bc72671.station"
+  },
+  "2C:1B:3A:F0:50:27": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "TV"
+  },
+  "6A:03:A8:DE:F6:86": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "iPhone.station"
+  },
+  "B6:30:EF:1A:2E:C8": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "iPad.station"
+  },
+  "76:69:BA:70:FE:19": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Galaxy-Tab-A-di-Marco.station"
+  },
+  "BC:10:2F:50:85:DB": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "TizenRT.station"
+  },
+  "EC:2B:EB:D3:5B:4B": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "1E:E7:9A:0E:30:CB": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Redmi-12.station"
+  },
+  "FA:A7:C2:43:C6:47": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "realme-C75.station"
+  },
+  "F8:25:51:59:F6:CC": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "EPSON59F6CC.station"
+  },
+  "F8:25:51:54:06:63": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "EPSON540663.station"
+  },
+  "5A:7C:0B:A3:97:4E": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Dispositivo LAN"
+  },
+  "78:45:58:23:E9:09": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "Casa.station"
+  },
+  "72:55:39:12:7E:77": {
+    "first_seen_ts": 1793467056.7512054,
+    "hostname": "realme-14-Pro-5G.station"
+  }
+}

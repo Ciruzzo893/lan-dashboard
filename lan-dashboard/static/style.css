@@ -1,0 +1,701 @@
+/* =========================================================
+   VARIABILI TEMA "RELAXING SOFT BLUE" & RESET
+   ========================================================= */
+:root {
+    --bg-page: #0F172A;         /* Blu notte profondo / ardesia */
+    --bg-card: #1E293B;         /* Sfondo dei riquadri */
+    --bg-card-inner: #0F172A88; /* Sfondo interno per sotto-box */
+    --border-color: #334155;    /* Bordi sottili */
+    --text-main: #F1F5F9;       /* Testo principale chiaro */
+    --text-muted: #94A3B8;      /* Testo secondario riposante */
+    --accent-blue: #38BDF8;     /* Accento blu morbido primario */
+    --accent-blue-alt: #60A5FA; /* Accento blu morbido secondario */
+    --accent-green: #34D399;    /* Stato attivo / nuovo dispositivo */
+    --accent-warn: #FBBF24;     /* Avviso / Batteria */
+    --accent-danger: #F87171;   /* Eliminazione / Allarme */
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --shadow-soft: 0 8px 24px rgba(2, 6, 23, 0.45);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Pagina singola fissa 100vh */
+    padding: 16px;
+}
+
+/* =========================================================
+   STRUTTURA GENERALE A 2 MACRO-COLONNE (CHAT ALLARGATA)
+   ========================================================= */
+.app-container {
+    display: grid;
+    grid-template-columns: 54% 46%; /* Colonna Chat-Bot più ampia verso destra */
+    gap: 20px;
+    height: 100%;
+    width: 100%;
+    padding-right: 20px;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================================================
+   COLONNA SINISTRA: SEZIONE CHAT-BOT
+   ========================================================= */
+.left-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 18px;
+    overflow: hidden;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 14px;
+}
+
+.chat-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-title-group h1 {
+    font-size: 1.25rem;
+    letter-spacing: 0.8px;
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--accent-warn);
+    box-shadow: 0 0 8px var(--accent-warn);
+}
+
+.status-dot.online {
+    background-color: var(--accent-green);
+    box-shadow: 0 0 8px var(--accent-green);
+}
+
+.model-selector-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.model-selector-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+#model-select {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+#model-select:focus {
+    border-color: var(--accent-blue);
+}
+
+/* Area Messaggi */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.message {
+    max-width: 88%;
+    padding: 12px 15px;
+    border-radius: var(--radius-md);
+    line-height: 1.5;
+    font-size: 0.92rem;
+    word-wrap: break-word;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #0284C7, #2563EB);
+    color: #FFFFFF;
+    border-bottom-right-radius: 4px;
+}
+
+.assistant-message {
+    align-self: flex-start;
+    background-color: var(--bg-page);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-bottom-left-radius: 4px;
+}
+
+.message-content pre {
+    background-color: #090D16;
+    padding: 10px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 8px 0;
+    border: 1px solid var(--border-color);
+}
+
+.message-content code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+}
+
+/* Barra allegato attivo */
+.attached-file-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(56, 189, 248, 0.12);
+    border: 1px solid var(--accent-blue);
+    color: var(--accent-blue);
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    font-size: 0.82rem;
+}
+
+#remove-attachment-btn {
+    background: transparent;
+    border: none;
+    color: var(--accent-danger);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Barra di scrittura */
+.chat-input-wrapper {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+#chat-input {
+    flex: 1;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#chat-input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+.icon-btn {
+    background-color: var(--accent-blue);
+    color: #0F172A;
+    border: none;
+    border-radius: var(--radius-md);
+    width: 46px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.icon-btn:hover {
+    background-color: var(--accent-blue-alt);
+}
+
+/* Due Bottoni Inferiori Affiancati */
+.chat-bottom-actions {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 10px;
+}
+
+.action-btn {
+    padding: 11px 14px;
+    border-radius: var(--radius-md);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.secondary-btn {
+    background-color: var(--bg-page);
+    color: var(--accent-blue);
+    border-color: var(--border-color);
+}
+
+.secondary-btn:hover {
+    border-color: var(--accent-blue);
+    background-color: rgba(56, 189, 248, 0.08);
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-alt));
+    color: #0F172A;
+    border: none;
+}
+
+.primary-btn:hover {
+    filter: brightness(1.08);
+}
+
+/* =========================================================
+   COLONNA DESTRA: DASH BOARD DI TELEMETRIA (GRIGLIA 3x2)
+   ========================================================= */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.dashboard-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-header h1 {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.telemetry-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1.25fr 1fr;
+    gap: 16px;
+    height: 100%;
+    min-height: 0;
+}
+
+.telemetry-card {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h2 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    letter-spacing: 0.4px;
+}
+
+.badge-live, .device-counter, .net-status-tag, .ups-badge {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border-radius: 8px;
+    background-color: var(--bg-page);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Colonne interne RIGA 1 e RIGA 2 */
+.inner-cols-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    flex: 1;
+    align-items: center;
+}
+
+.inner-cols-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    flex: 1;
+    align-items: center;
+}
+
+.metric-col {
+    background-color: var(--bg-card-inner);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+
+.metric-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.metric-value {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.metric-value-sm {
+    font-size: 0.98rem;
+}
+
+.metric-unit, .metric-sub {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.accent-temp {
+    color: var(--accent-blue);
+}
+
+.accent-watt {
+    color: var(--accent-green);
+}
+
+/* Barre di progresso per CPU, RAM, SSD */
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background-color: #1E293B;
+    border-radius: 4px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-blue-alt));
+    transition: width 0.4s ease;
+}
+
+/* RIGA 2 - Scanner di sicurezza LAN */
+.scanner-table-container {
+    flex: 1;
+    overflow-y: auto;
+    border-radius: 8px;
+    background-color: var(--bg-card-inner);
+    border: 1px solid var(--border-color);
+}
+
+.scanner-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.74rem;
+    text-align: left;
+}
+
+.scanner-table th {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-page);
+    color: var(--text-muted);
+    padding: 6px 8px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.scanner-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+    color: var(--text-main);
+}
+
+.scanner-table tr.new-device {
+    background-color: rgba(52, 211, 153, 0.14);
+}
+
+.new-badge {
+    background-color: var(--accent-green);
+    color: #0F172A;
+    font-size: 0.62rem;
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+/* RIGA 2 - Rete e Mini-Timer in basso a destra */
+.network-card {
+    position: relative;
+}
+
+.network-metrics {
+    margin-bottom: 8px;
+}
+
+.network-timer-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    padding-top: 6px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.timer-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.timer-countdown {
+    background-color: var(--bg-page);
+    color: var(--accent-blue);
+    border: 1px solid var(--border-color);
+    padding: 3px 9px;
+    border-radius: 8px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* RIGA 3 - Stato UPS */
+.ups-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    flex: 1;
+}
+
+.ups-item {
+    background-color: var(--bg-card-inner);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ups-val {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-top: 2px;
+}
+
+/* RIGA 3 - Area Destra lasciata completamente vuota */
+.empty-grid-slot {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+/* =========================================================
+   FINESTRA MODALE: BACHECA RAPIDA (MINI-NAS)
+   ========================================================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-card {
+    width: 90%;
+    max-width: 720px;
+    max-height: 82vh;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+}
+
+.modal-header h2 {
+    font-size: 1.1rem;
+    color: var(--accent-blue);
+}
+
+.modal-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.close-modal-btn {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.nas-upload-bar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background-color: var(--bg-page);
+    padding: 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+#nas-file-input {
+    flex: 1;
+    color: var(--text-main);
+    font-size: 0.85rem;
+}
+
+.nas-status-msg {
+    font-size: 0.82rem;
+    color: var(--accent-green);
+    min-height: 18px;
+}
+
+.nas-files-container {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-page);
+}
+
+.nas-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.nas-table th {
+    background-color: #162032;
+    color: var(--text-muted);
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nas-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.nas-btn-download, .nas-btn-delete {
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    margin-left: 6px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nas-btn-download {
+    background-color: var(--accent-blue);
+    color: #0F172A;
+}
+
+.nas-btn-delete {
+    background-color: rgba(248, 113, 113, 0.15);
+    color: var(--accent-danger);
+    border: 1px solid var(--accent-danger);
+}
+
+.empty-row {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 20px !important;
+}
+
+/* Scrollbar personalizzata in stile Soft Blue */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-page);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}

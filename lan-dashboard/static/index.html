@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAN Dashboard & AI Locale</title>
+    <!-- Stile principale -->
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Librerie per Markdown e colorazione sintassi codice (con fallback automatico in script.js se offline) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+    <main class="app-container">
+        
+        <!-- ==========================================
+             COLONNA SINISTRA: CHAT-BOT & GESTIONE FILE
+             ========================================== -->
+        <section class="left-column card">
+            
+            <!-- Intestazione Chat -->
+            <header class="chat-header">
+                <div class="chat-title-group">
+                    <span class="status-dot" id="ollama-status-dot" title="Stato Ollama"></span>
+                    <h1>CHAT - BOT</h1>
+                </div>
+                <div class="model-selector-group">
+                    <label for="model-select">MODELLO</label>
+                    <select id="model-select">
+                        <option value="">Caricamento modelli...</option>
+                    </select>
+                </div>
+            </header>
+
+            <!-- Area Messaggi Scorrevole -->
+            <div class="chat-messages" id="chat-messages">
+                <div class="message assistant-message">
+                    <div class="message-content">
+                        Sistema pronto. Seleziona un modello Ollama in alto a destra e scrivi un messaggio o allega un file per iniziare.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Badge file allegato alla chat (visibile solo quando si seleziona un file) -->
+            <div class="attached-file-bar hidden" id="attached-file-bar">
+                <span id="attached-file-name">Nessun file</span>
+                <button type="button" id="remove-attachment-btn" title="Rimuovi allegato">✕</button>
+            </div>
+
+            <!-- Barra di Scrittura -->
+            <div class="chat-input-wrapper">
+                <input 
+                    type="text" 
+                    id="chat-input" 
+                    placeholder="Punto per scrivere... (Premi Invio per inviare)" 
+                    autocomplete="off"
+                >
+                <button type="button" id="send-btn" class="icon-btn" title="Invia messaggio">➤</button>
+            </div>
+
+            <!-- Input file nascosto per "ALLEGA FILE" nella chat -->
+            <input type="file" id="chat-file-input" class="hidden" accept=".txt,.py,.js,.html,.css,.json,.md,.csv,.log,.sh,.png,.jpg,.jpeg,.webp">
+
+            <!-- Due Bottoni Inferiori Affiancati -->
+            <div class="chat-bottom-actions">
+                <button type="button" id="attach-file-btn" class="action-btn secondary-btn">
+                    📎 ALLEGA FILE
+                </button>
+                <button type="button" id="open-nas-btn" class="action-btn primary-btn">
+                    📂 CONDIVIDI FILE - BACHECA RAPIDA
+                </button>
+            </div>
+
+        </section>
+
+        <!-- ==========================================
+             COLONNA DESTRA: DASH BOARD DI TELEMETRIA
+             ========================================== -->
+        <section class="right-column">
+            
+            <!-- Titolo con linea di separazione -->
+            <header class="dashboard-header">
+                <h1>DASH BOARD</h1>
+            </header>
+
+            <!-- Griglia 3 Righe x 2 Colonne -->
+            <div class="telemetry-grid">
+
+                <!-- RIGA 1 - RIQUADRO 1 (Sinistra): PC-MINI (CPU, RAM, SPAZIO) -->
+                <div class="card telemetry-card">
+                    <div class="card-header">
+                        <h2>PC-MINI — RISORSE SISTEMA</h2>
+                        <span class="badge-live">2s LIVE</span>
+                    </div>
+                    <div class="inner-cols-3">
+                        <div class="metric-col">
+                            <span class="metric-label">CPU</span>
+                            <span class="metric-value" id="val-cpu">--%</span>
+                            <div class="progress-bar"><div class="progress-fill" id="bar-cpu"></div></div>
+                        </div>
+                        <div class="metric-col">
+                            <span class="metric-label">RAM</span>
+                            <span class="metric-value" id="val-ram">--%</span>
+                            <div class="progress-bar"><div class="progress-fill" id="bar-ram"></div></div>
+                        </div>
+                        <div class="metric-col">
+                            <span class="metric-label">SPAZIO</span>
+                            <span class="metric-value metric-value-sm" id="val-disk">-- / -- GB</span>
+                            <div class="progress-bar"><div class="progress-fill" id="bar-disk"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGA 1 - RIQUADRO 2 (Destra): PC-MINI (TEMP, WATT) -->
+                <div class="card telemetry-card">
+                    <div class="card-header">
+                        <h2>PC-MINI — SENSORI TERMICI &amp; ENERGIA</h2>
+                        <span class="badge-live">2s LIVE</span>
+                    </div>
+                    <div class="inner-cols-2">
+                        <div class="metric-col">
+                            <span class="metric-label">TEMP.</span>
+                            <span class="metric-value accent-temp" id="val-temp">--°C</span>
+                            <span class="metric-sub" id="sub-temp">Core i5-6500T</span>
+                        </div>
+                        <div class="metric-col">
+                            <span class="metric-label">WATT</span>
+                            <span class="metric-value accent-watt" id="val-watt">-- W</span>
+                            <span class="metric-sub" id="sub-watt">Consumo istantaneo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGA 2 - RIQUADRO 1 (Sinistra): SCANNER DI SICUREZZA RETE LOCALE -->
+                <div class="card telemetry-card">
+                    <div class="card-header">
+                        <h2>SCANNER DI SICUREZZA DELLA RETE LOCALE (DATI)</h2>
+                        <span class="device-counter" id="device-count">0 dispositivi</span>
+                    </div>
+                    <div class="scanner-table-container">
+                        <table class="scanner-table">
+                            <thead>
+                                <tr>
+                                    <th>Dispositivo</th>
+                                    <th>IP Locale</th>
+                                    <th>MAC Address</th>
+                                    <th>Rilevato</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scanner-tbody">
+                                <tr>
+                                    <td colspan="4" class="empty-row">Scansione rete LAN in corso...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- RIGA 2 - RIQUADRO 2 (Destra): RETE (CARICA, SCARICA, PING) + TIMER 5 MIN -->
+                <div class="card telemetry-card network-card">
+                    <div class="card-header">
+                        <h2>RETE (CARICA, SCARICA, PING)</h2>
+                        <span class="net-status-tag" id="net-test-status">Attivo</span>
+                    </div>
+                    <div class="inner-cols-3 network-metrics">
+                        <div class="metric-col">
+                            <span class="metric-label">SCARICA (DL)</span>
+                            <span class="metric-value" id="val-download">--</span>
+                            <span class="metric-unit">Mbps</span>
+                        </div>
+                        <div class="metric-col">
+                            <span class="metric-label">CARICA (UL)</span>
+                            <span class="metric-value" id="val-upload">--</span>
+                            <span class="metric-unit">Mbps</span>
+                        </div>
+                        <div class="metric-col">
+                            <span class="metric-label">PING</span>
+                            <span class="metric-value" id="val-ping">--</span>
+                            <span class="metric-unit">ms</span>
+                        </div>
+                    </div>
+                    <!-- Mini-timer in basso a destra -->
+                    <div class="network-timer-footer">
+                        <span class="timer-label">Prossima verifica automatica tra:</span>
+                        <span class="timer-countdown" id="speedtest-countdown">01:00</span>
+                    </div>
+                </div>
+
+                <!-- RIGA 3 - RIQUADRO 1 (Sinistra): STATO UPS -->
+                <div class="card telemetry-card">
+                    <div class="card-header">
+                        <h2>STATO UPS (LEGRAND KEOR SP 600VA)</h2>
+                        <span class="ups-badge" id="ups-mode-badge">Verifica USB...</span>
+                    </div>
+                    <div class="ups-grid">
+                        <div class="ups-item">
+                            <span class="metric-label">ALIMENTAZIONE</span>
+                            <span class="ups-val" id="val-ups-status">--</span>
+                        </div>
+                        <div class="ups-item">
+                            <span class="metric-label">BATTERIA</span>
+                            <span class="ups-val" id="val-ups-battery">--%</span>
+                        </div>
+                        <div class="ups-item">
+                            <span class="metric-label">AUTONOMIA STIMATA</span>
+                            <span class="ups-val" id="val-ups-runtime">-- min</span>
+                        </div>
+                        <div class="ups-item">
+                            <span class="metric-label">CARICO APPLICATO</span>
+                            <span class="ups-val" id="val-ups-load">--%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGA 3 - AREA DESTRA: COMPLETAMENTE VUOTA PER MODULI FUTURI -->
+                <div class="empty-grid-slot"></div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =====================================================
+         MODALE: CONDIVIDI FILE - BACHECA RAPIDA (MINI-NAS LAN)
+         ===================================================== -->
+    <div class="modal-overlay hidden" id="nas-modal">
+        <div class="modal-card card">
+            <header class="modal-header">
+                <div>
+                    <h2>📂 CONDIVIDI FILE - BACHECA RAPIDA (LAN)</h2>
+                    <p class="modal-subtitle">Archivio condiviso sull'SSD del Mini PC. Accessibile da PC, telefono e iPad.</p>
+                </div>
+                <button type="button" id="close-nas-btn" class="close-modal-btn" title="Chiudi">✕</button>
+            </header>
+
+            <!-- Barra caricamento nuovo file nello spazio condiviso -->
+            <div class="nas-upload-bar">
+                <input type="file" id="nas-file-input" multiple>
+                <button type="button" id="nas-upload-btn" class="action-btn primary-btn">
+                    ⬆️ CARICA SULLA BACHECA
+                </button>
+            </div>
+            <div id="nas-upload-status" class="nas-status-msg"></div>
+
+            <!-- Lista dei file salvati sull'SSD -->
+            <div class="nas-files-container">
+                <table class="nas-table">
+                    <thead>
+                        <tr>
+                            <th>Nome File</th>
+                            <th>Dimensione</th>
+                            <th>Data Caricamento</th>
+                            <th class="text-right">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody id="nas-files-tbody">
+                        <tr>
+                            <td colspan="4" class="empty-row">Nessun file presente nella bacheca condivisa.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Principale -->
+    <script src="/static/script.js"></script>
+</body>
+</html>
