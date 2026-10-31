@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="/home/gabry/lan-dashboard/lan-dashboard"
 cd "$PROJECT_DIR" || exit 1
 
 GREEN='\033[0;32m'
